@@ -6,23 +6,24 @@ matrix_1 = np.random.random(size=(1000,1000))
 matrix_2 = np.random.random(size=(1000,1000))
 matrix_3 = np.random.random(size=(1000,1000))
 #Kyle's Data Files
-kJ_hand = pd.read_csv('kjh_data.csv')
-kJ_front = pd.read_csv('kjf_data.csv')
-kJ_back = pd.read_csv('kjb_data.csv')
-kW_hand = pd.read_csv('kwh_data.csv')
-kW_front = pd.read_csv('kwf_data.csv')
-kW_back = pd.read_csv('kwb_data.csv')
+kJ_hand = pd.read_csv('data/jumping/kjh_data.csv')
+kJ_front = pd.read_csv('data/jumping/kjf_data.csv')
+kJ_back = pd.read_csv('data/jumping/kjb_data.csv')
+kW_hand = pd.read_csv('data/walking/kwh_data.csv')
+kW_front = pd.read_csv('data/walking/kwf_data.csv')
+kW_back = pd.read_csv('data/walking/kwb_data.csv')
 #Abdellah's Data Files
-aJ_backright = pd.read_csv('ajbrp_data.csv')
-aJ_frontleft = pd.read_csv('ajflp_data.csv')
-aW_backright = pd.read_csv('awbrp_data.csv')
-aW_frontleft = pd.read_csv('awflp.csv')
+aJ_backright = pd.read_csv('data/jumping/ajbrp_data.csv')
+aJ_frontleft = pd.read_csv('data/jumping/ajflp_data.csv')
+aW_backright = pd.read_csv('data/walking/awbrp_data.csv')
+aW_frontleft = pd.read_csv('data/walking/awflp_data.csv')
 #Liam's Data Files
-lJ_backleft = pd.read_csv('ljlbp_data.csv')
-lW_lefthand = pd.read_csv('lwlh_data.csv')
-lW_leftpocket = pd.read_csv('lwlp_data.csv')
-lW_righthand = pd.read_csv('lwrh_data.csv')
-lW_rightpocket = pd.read_csv('lwrp_data.csv')
+lJ_backleft = pd.read_csv('data/jumping/ljlbp_data.csv')
+lJ_backright = pd.read_csv('data/jumping/ljbrp_data.csv')
+lW_lefthand = pd.read_csv('data/walking/lwlh_data.csv')
+lW_leftpocket = pd.read_csv('data/walking/lwlp_data.csv')
+lW_righthand = pd.read_csv('data/walking/lwrh_data.csv')
+lW_rightpocket = pd.read_csv('data/walking/lwrp_data.csv')
 
 with h5py.File('hdf5_data.h5', 'w') as hdf:
     #Creating main dataset
@@ -53,18 +54,19 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
 
     L1 = hdf.create_group('/Liam')
     L1.create_dataset('l_jump_leftback', data=lJ_backleft)
+    L1.create_dataset('l_jump_rightback', data=lJ_backright)
     L1.create_dataset('l_walk_lefthand', data=lW_lefthand)
     L1.create_dataset('l_walk_leftpocket', data=lW_leftpocket)
     L1.create_dataset('l_walk_righthand', data=lW_lefthand)
-    L1.create_dataset('l_walk_leftpocket', data=lW_leftpocket)
+    L1.create_dataset('l_walk_rightpocket', data=lW_rightpocket)
  
 
 
 with h5py.File('hdf5_data.h5', 'r') as hdf:
     items = list(hdf.items())
     print(items)
-    Matt_Group = hdf.get('/Kyle')
+    Kyle = hdf.get('/Liam')
     print(list(Kyle.items()))
-    d1 = Kyle.get('jump_hand')
+    d1 = Kyle.get('l_walk_rightpocket')
     d1 = np.array(d1)
     print(d1.shape)
