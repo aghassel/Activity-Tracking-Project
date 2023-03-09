@@ -6,19 +6,23 @@ matrix_1 = np.random.random(size=(1000,1000))
 matrix_2 = np.random.random(size=(1000,1000))
 matrix_3 = np.random.random(size=(1000,1000))
 #Kyle's Data Files
-kjh_data = pd.read_csv('kjh_data.csv')
-kjf_data = pd.read_csv('kjf_data.csv')
-kjb_data = pd.read_csv('kjb_data.csv')
-krh_data = pd.read_csv('krh_data.csv')
-krf_data = pd.read_csv('krf_data.csv')
-krb_data = pd.read_csv('krb_data.csv')
-kwh_data = pd.read_csv('kwh_data.csv')
-kwf_data = pd.read_csv('kwf_data.csv')
-kwb_data = pd.read_csv('kwb_data.csv')
-# #Abdellah's Data Files
-
-# #Liam's Data Files
-
+kJ_hand = pd.read_csv('kjh_data.csv')
+kJ_front = pd.read_csv('kjf_data.csv')
+kJ_back = pd.read_csv('kjb_data.csv')
+kW_hand = pd.read_csv('kwh_data.csv')
+kW_front = pd.read_csv('kwf_data.csv')
+kW_back = pd.read_csv('kwb_data.csv')
+#Abdellah's Data Files
+aJ_backright = pd.read_csv('ajbrp_data.csv')
+aJ_frontleft = pd.read_csv('ajflp_data.csv')
+aW_backright = pd.read_csv('awbrp_data.csv')
+aW_frontleft = pd.read_csv('awflp.csv')
+#Liam's Data Files
+lJ_backleft = pd.read_csv('ljlbp_data.csv')
+lW_lefthand = pd.read_csv('lwlh_data.csv')
+lW_leftpocket = pd.read_csv('lwlp_data.csv')
+lW_righthand = pd.read_csv('lwrh_data.csv')
+lW_rightpocket = pd.read_csv('lwrp_data.csv')
 
 with h5py.File('hdf5_data.h5', 'w') as hdf:
     #Creating main dataset
@@ -34,21 +38,25 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
 
     #Create member subgroups
     K1 = hdf.create_group('/Kyle')
-    K1.create_dataset('jump_hand', data=kjh_data)
-    K1.create_dataset('jump_front', data=kjf_data)
-    K1.create_dataset('jump_back', data=kjb_data)
-    K1.create_dataset('run_hand', data=krh_data)
-    K1.create_dataset('run_front', data=krf_data)
-    K1.create_dataset('run_back', data=krb_data)
-    K1.create_dataset('walk_front', data=kwf_data)
-    K1.create_dataset('walk_back', data=kwb_data)
+    K1.create_dataset('k_jump_hand', data=kJ_hand)
+    K1.create_dataset('k_jump_front', data=kJ_front)
+    K1.create_dataset('k_jump_back', data=kJ_back)
+    K1.create_dataset('k_walk_hand', data=kW_hand)
+    K1.create_dataset('k_walk_front', data=kW_front)
+    K1.create_dataset('k_walk_back', data=kW_back)
 
-    # A1 = hdf.create_group('/Abdellah')
-    # A1.create_dataset('jump_hand', data=)
-   
+    A1 = hdf.create_group('/Abdellah')
+    A1.create_dataset('a_jump_backright', data=aJ_backright)
+    A1.create_dataset('a_jump_frontleft', data=aJ_frontleft)
+    A1.create_dataset('a_walk_backright', data=aW_backright)
+    A1.create_dataset('a_walk_frontleft', data=aW_frontleft)
 
-    # L1 = hdf.create_group('/Liam')
-    # L1.create_dataset('jump_hand', data=)
+    L1 = hdf.create_group('/Liam')
+    L1.create_dataset('l_jump_leftback', data=lJ_backleft)
+    L1.create_dataset('l_walk_lefthand', data=lW_lefthand)
+    L1.create_dataset('l_walk_leftpocket', data=lW_leftpocket)
+    L1.create_dataset('l_walk_righthand', data=lW_lefthand)
+    L1.create_dataset('l_walk_leftpocket', data=lW_leftpocket)
  
 
 
