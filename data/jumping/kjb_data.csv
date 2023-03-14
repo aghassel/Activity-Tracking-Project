@@ -1,4 +1,5 @@
-﻿1.20E+02,-3.44E+00,-2.24E+01,7.20E-02,2.26E+01
+﻿"Time (s)","Linear Acceleration x (m/s^2)","Linear Acceleration y (m/s^2)","Linear Acceleration z (m/s^2)","Absolute acceleration (m/s^2)"
+1.20E+02,-3.44E+00,-2.24E+01,7.20E-02,2.26E+01
 1.20E+02,-2.38E+00,-2.24E+01,-3.21E-01,2.25E+01
 1.20E+02,-2.18E-01,-2.38E+01,-9.65E-01,2.38E+01
 1.20E+02,1.89E+00,-2.38E+01,-2.43E+00,2.40E+01
