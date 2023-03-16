@@ -2,6 +2,7 @@ import numpy as np
 import h5py
 import pandas as pd
 from sklearn.model_selection import train_test_split
+import random 
 
 #Kyle's Data Files
 kJ_hand = pd.read_csv('data/jumping/kjh_data.csv')
@@ -53,10 +54,14 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
     group_size = 500
     groups = [cds.iloc[i:i+group_size] for i in range(0, len(cds), group_size)]
     count_groups = int(np.ceil(len(cds) / group_size))
+    random.shuffle(groups)
     
-    # Shuffle group elements
-    for i in range(count_groups):
-        groups[i] = groups[i].sample(frac=1).reset_index(drop=True)
+
+    # # Shuffle group elements
+    # for i in range(count_groups):
+    #     groups[i] = groups[i].sample(frac=1).reset_index(drop=True)
+
+    print(groups)
 
     train_data, test_data = train_test_split(cds, test_size=0.1)
        
@@ -99,11 +104,11 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
     L1.create_dataset('l_walk_rightpocket', data=lW_rightpocket)
  
 # Output test
-    with h5py.File('hdf5_data.h5', 'r') as hdf:
-        items = list(hdf.items())
-        print(items)
-        print(list(testing_dataset.items()))
-        d1 = combined_dataset.get('testing_dataset')
-        d1 = np.array(d1)
-        print('\n')
-        print(d1.shape)
+    # with h5py.File('hdf5_data.h5', 'r') as hdf:
+    #     items = list(hdf.items())
+    #     print(items)
+    #     print(list(testing_dataset.items()))
+    #     d1 = combined_dataset.get('testing_dataset')
+    #     d1 = np.array(d1)
+    #     print('\n')
+    #     print(d1.shape)
