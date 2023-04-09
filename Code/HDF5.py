@@ -5,14 +5,12 @@ from sklearn.model_selection import train_test_split
 import random 
 
 #Kyle's Data Files
-kJ_hand = pd.read_csv('data/jumping/kjh_data.csv')
-kJ_front = pd.read_csv('data/jumping/kjf_data.csv')
-kJ_back = pd.read_csv('data/jumping/kjb_data.csv')
-kW_hand = pd.read_csv('data/walking/kwh_data.csv')
-kW_front = pd.read_csv('data/walking/kwf_data.csv')
-kW_back = pd.read_csv('data/walking/kwb_data.csv')
+kJ_front = pd.read_csv('newdata/jumping/kyle_jump_front.csv')
+kJ_back = pd.read_csv('newdata/jumping/kyle_jump_back.csv')
+kW_front = pd.read_csv('newdata/walking/kyle_walk_front.csv')
+kW_back = pd.read_csv('newdata/walking/kyle_walk_back.csv')
 #Kyle's Combined Dataset 
-kyle_combined = pd.concat([kJ_hand,kJ_front,kJ_back,kW_hand,kW_front,kW_back]); 
+kyle_combined = pd.concat([kJ_front,kJ_back,kW_front,kW_back]); 
 kyle_combined.to_csv("data/combined/kyle_combined_data.csv", index=False)
 
 #Abdellah's Data Files
@@ -35,13 +33,16 @@ lW_rightpocket = pd.read_csv('data/walking/lwrp_data.csv')
 liam_combined = pd.concat([lJ_backleft,lJ_backright,lW_lefthand,lW_leftpocket,lW_righthand,lW_rightpocket]); 
 liam_combined.to_csv("data/combined/liam_combined_data.csv", index=False)
 
-#Concatenated Dataset 
-combined_dataset = pd.concat([kJ_hand,kJ_front,kJ_back,kW_hand,kW_front,kW_back,aJ_backright,aJ_frontleft,aW_backright,aW_frontleft,lJ_backleft,lJ_backright,lW_lefthand,lW_leftpocket,lW_righthand,lW_rightpocket])
+#Concatenated Datasets 
+combined_dataset = pd.concat([kJ_front,kJ_back,kW_front,kW_back,aJ_backright,aJ_frontleft,aW_backright,aW_frontleft,lJ_backleft,lJ_backright,lW_lefthand,lW_leftpocket,lW_righthand,lW_rightpocket])
+walking_combined = pd.concat([kW_front,kW_back,aW_backright,aW_frontleft,lW_lefthand,lW_leftpocket,lW_righthand,lW_rightpocket])
+jumping_combined = pd.concat([kJ_front,kJ_back,aJ_backright,aJ_frontleft,lJ_backleft,lJ_backright])
 
-#Write combined dataset to a new CSV file
+
+#Write combined datasets to a new CSV file
 combined_dataset.to_csv("data/combined/Combined_dataset.csv", index=False)
-
-
+walking_combined.to_csv("data/combined/walking_combined.csv", index=False)
+jumping_combined.to_csv("data/combined/jumping_combined.csv", index=False)
 
 with h5py.File('hdf5_data.h5', 'w') as hdf:
     #Creating main dataset
@@ -61,7 +62,7 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
     # for i in range(count_groups):
     #     groups[i] = groups[i].sample(frac=1).reset_index(drop=True)
 
-    print(groups)
+    #print(groups)
 
     train_data, test_data = train_test_split(cds, test_size=0.1)
        
@@ -82,10 +83,8 @@ with h5py.File('hdf5_data.h5', 'w') as hdf:
 
     #Create member subgroups
     K1 = hdf.create_group('/Kyle')
-    K1.create_dataset('k_jump_hand', data=kJ_hand)
     K1.create_dataset('k_jump_front', data=kJ_front)
     K1.create_dataset('k_jump_back', data=kJ_back)
-    K1.create_dataset('k_walk_hand', data=kW_hand)
     K1.create_dataset('k_walk_front', data=kW_front)
     K1.create_dataset('k_walk_back', data=kW_back)
 
