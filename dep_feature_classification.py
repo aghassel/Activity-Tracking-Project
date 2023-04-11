@@ -43,7 +43,7 @@ def segment_data(data, window_size=5, sample_rate=100):
 def extract_features(segment):
     features = []
     featured_columns = ['Absolute acceleration (m/s^2)']  # only keep the absolute acceleration column
-    for column in featured_columns:  # Exclude the 'Activity' column
+    for column in featured_columns: 
         column_data = segment[column]
         mean = column_data.mean()
         std = column_data.std()
@@ -67,7 +67,7 @@ data_files = {
                 "frontleft": "data/walking/awflp_data.csv",
             },
     },
-  }  # Your data files dictionary with activity and positions
+  }
 
 activity_codes = {"jumping": 0, "walking": 1}
 
