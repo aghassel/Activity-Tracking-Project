@@ -1,9 +1,5 @@
 # Activity Tracking Project
 
-**Course: ELEC390**
+Logistic regression model that identifies walking or jumping data from a Phyphox raw data. 
 
-**Project Report**
-
-**Group Number: 44**
-
-**Abdellah Ghassel (20230384), Kyle Deverell (20217339), Liam O'Regan (20233042)**
+**Abdellah Ghassel, Kyle Deverell, Liam O'Regan **
